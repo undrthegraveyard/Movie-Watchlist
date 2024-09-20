@@ -1,0 +1,312 @@
+// CSS Reset
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+#root, #__next {
+  isolation: isolate;
+}
+
+// Variables
+
+$font-family: 'Inter', sans-serif;
+
+$border-radius: 0.25rem;
+
+$Mainheading-style: (
+  font-size: 2.674rem,
+  letter-spacing: 0.015rem,
+  line-height: 1.48,
+  font-weight: 700 
+);
+
+$Subheading-style: (
+  font-size: 1.125rem,
+  letter-spacing: 0.05rem,
+  line-height: 1.25,
+  font-weight: 500 
+);
+
+$Body-style: (
+  font-size: 0.875rem,
+  letter-spacing: 0.05rem,
+  line-height: 1.25,
+  font-weight: 400 
+);
+
+$caption-style: (
+  font-size: 0.75rem,
+  letter-spacing: 0.05rem,
+  line-height: 1.25,
+  font-weight: 400 
+);
+
+// Custom properties
+
+h1 {
+  @each $property, $value in $Mainheading-style {
+    #{$property}: #{$value};
+  }
+  font-family: $font-family;
+}
+
+h2 {
+  @each $property, $value in $Subheading-style {
+    #{$property}: #{$value};
+  }
+  font-family: $font-family;
+}
+
+p {
+  @each $property, $value in $Body-style {
+    #{$property}: #{$value};
+  }
+  font-family: $font-family;
+}
+
+span {
+  @each $property, $value in $caption-style {
+    #{$property}: #{$value};
+  }
+  font-family: $font-family;
+}
+
+input {
+  @each $property, $value in $Body-style {
+    #{$property}: #{$value};
+  }
+  font-family: $font-family;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+ 
+  background: url(/assets/images/Background_Image.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 40vh;
+  color: #fff;
+  text-align: center;
+}
+
+.header-content {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  color: #000;
+
+  height: 500px;
+}
+
+.search-section {
+  position: absolute;
+  bottom: 60%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 100%;
+  max-width: 600px;
+  padding: 0 1rem;
+}
+
+.search-form {
+  display: flex;
+  width: 100%;
+  background-color: #fff;
+  border: 2px solid #D1D5DB;
+  border-radius: $border-radius;
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  background-color: #fff;
+  border-right: 1px solid #D1D5DB;
+}
+
+.search-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.search-icon {
+  width: auto;
+  height: 100%;
+  max-height: 2.98rem; 
+  filter: grayscale(100%) opacity(0.5);
+border-radius: $border-radius;
+}
+
+.search-input {
+  flex-grow: 1;
+  border: none;
+  padding: 0.75rem 0.5rem;
+  font-size: 1rem;
+  outline: none;
+
+  &::placeholder {
+    color: #999;
+  }
+}
+
+.search-button {
+  background-color: F9FAFB;
+  color: #000;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-family: $font-family;
+  border-radius: $border-radius;
+  
+  @each $property, $value in $Body-style {
+    #{$property}: #{$value};
+  }
+  &:hover {
+    background-color: #333;
+    color: #fff;
+  }
+}
+
+section {
+  .results {
+    margin-top: 3rem;
+    padding: 0;
+
+    .movie-card {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      margin: 0 1rem;
+
+      .movie-card__main-container {
+        display: flex;
+        gap: 21px;
+        width: 100%;
+        background-color: #fff;
+        padding: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: $border-radius;
+      }
+
+      .movie-card__poster-container {
+        flex-shrink: 0;
+        width: 150px;
+        height: 225px; //Make this responsive later
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .movie-card__container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        flex-grow: 1;
+      }
+
+      .movie-card__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .movie-card__title {
+        @each $property, $value in $Subheading-style {
+          #{$property}: #{$value};
+        }
+      }
+
+      .movie-card__rating,
+      .movie-card__info,
+      .movie-card__watchlist {
+        @each $property, $value in $caption-style {
+          #{$property}: #{$value};
+        }
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+      }
+       
+      .movie-card__info-container {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .movie-card__info {
+          display: flex;
+          flex-direction: row;
+          gap: 12px;
+        }
+      }
+
+      .movie-card__description-text {
+        @each $property, $value in $Body-style {
+          #{$property}: #{$value};
+        }
+
+         .movie-card__read-more {
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: #000;
+          text-decoration: underline;
+          display: inline;
+            //How to make this button in the same line as the text?
+         }
+      }
+
+      .movie-card__watchlist-icon {
+        width: 1.4rem;
+        height: 1.4rem;
+        border-radius: 99%;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+
+
