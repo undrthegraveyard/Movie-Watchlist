@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <!--JS-->
   <script src="index.js" defer></script>
+  <script src="watchlist.js" defer></script>
   <!--TITLE-->
   <title>Movie Watchlist</title>
 </head>
@@ -21,7 +22,7 @@
     <header>
       <div class="header-content">
         <h1 class="header__title" id="headerTitle">Find your film</h1>
-        <span class="header__subtitle" id="headerSubtitle">My Watchlist</span>
+        <span class="header__subtitle" id="headerSubtitle"><a href="watchlist.html">My Watchlist</a></span>
       </div>
     </header>
     <section class="search-section">
@@ -30,7 +31,7 @@
           <div class="search-icon-container">
             <img src="assets/icons/icon-3.svg" alt="Search icon" class="search-icon">
           </div>
-          <input type="text" placeholder="Blade Runner" class="search-input">
+          <input type="text" placeholder="Blade Runner" class="search-input" id="searchInput">
         </div>
         <button type="submit" class="search-button">Search</button>
       </form>
@@ -43,3 +44,7 @@
   </main>
 </body>
 </html>
+
+//NEXT STEPS:
+//1. Intergrate the Database 
+//2. Show the popular actors in the movies added to the watchlist
