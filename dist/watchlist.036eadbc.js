@@ -646,7 +646,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
               <div class="movie-card__header">
                 <p class="movie-card__title">${movie.Title}</p>
                 <div class="movie-card__rating">
-                  <img src="./assets/icons/icon-star.svg" alt="movie ratings" class="movie-card__rating-icon">
+                  <img src="/assets/icons/icon-star.svg" alt="movie ratings" class="movie-card__rating-icon">
                   <span class="movie-card__imdb-rating">${movie.imdbRating || "N/A"}</span>
                 </div>
               </div>
