@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "start": "parcel index.html watchlist.html",
-    "build": "parcel build index.html watchlist.html"
+    "build": "parcel build index.html watchlist.html --no-cache --public-url ./",
+    "debug": "parcel index.html watchlist.html --no-cache --log-level verbose"
   },
   "keywords": [],
   "author": "",
