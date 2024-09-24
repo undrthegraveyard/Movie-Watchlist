@@ -45,7 +45,7 @@ function displayData(movie){
       <div class="movie-card__header">
         <p class="movie-card__title">${movie.Title}</p>
         <div class="movie-card__rating">
-          <img src="./assets/icons/icon-star.svg" alt="movie ratings" class="movie-card__rating-icon">
+          <img src="assets/icons/icon-star.svg" alt="movie ratings" class="movie-card__rating-icon">
           <span class="movie-card__imdb-rating">${movie.imdbRating || 'N/A'}</span>
         </div>
       </div>
@@ -54,7 +54,7 @@ function displayData(movie){
           <p class="movie-card__runtime">${movie.Runtime || 'N/A'}</p>
           <p class="movie-card__genre">${movie.Genre || 'N/A'}</p>
           <div class="movie-card__watchlist">
-            <img src="/assets/icons/icon-1.svg" alt="A button to add the movie to the watchlist" class="movie-card__watchlist-icon" id="buttonAddToWatchList-${movie.imdbID}">
+            <img src="assets/icons/icon-1.svg" alt="A button to add the movie to the watchlist" class="movie-card__watchlist-icon" id="buttonAddToWatchList-${movie.imdbID}">
             <span class="buttonAddToWatchList" id="buttonAddToWatchList-${movie.imdbID}">Watchlist</span>
           </div>
         </div>

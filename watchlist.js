@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="movie-card__header">
                 <p class="movie-card__title">${movie.Title}</p>
                 <div class="movie-card__rating">
-                  <img src="/assets/icons/icon-star.svg" alt="movie ratings" class="movie-card__rating-icon">
+                  <img src="assets/icons/icon-star.svg" alt="movie ratings" class="movie-card__rating-icon">
                   <span class="movie-card__imdb-rating">${movie.imdbRating || 'N/A'}</span>
                 </div>
               </div>
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <p class="movie-card__runtime">${movie.Runtime || 'N/A'}</p>
                   <p class="movie-card__genre">${movie.Genre || 'N/A'}</p>
                   <div class="movie-card__watchlist">
-                    <img src="/assets/icons/icon-2.svg" alt="A button to remove the movie from the watchlist" class="movie-card__watchlist-icon" id="buttonRemoveFromWatchList-${movie.imdbID}">
+                    <img src="assets/icons/icon-2.svg" alt="A button to remove the movie from the watchlist" class="movie-card__watchlist-icon" id="buttonRemoveFromWatchList-${movie.imdbID}">
                     <span class="buttonRemoveFromWatchList" id="buttonRemoveFromWatchList-${movie.imdbID}">Remove</span>
                   </div>
                 </div>
