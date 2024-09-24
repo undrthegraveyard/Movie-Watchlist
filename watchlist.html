@@ -9,9 +9,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <!-- CSS -->
   <link rel="stylesheet" href="css/styles.css">
-  <!--JS-->
-  <script src="watchlist.js" defer></script>
-  <script src="index.js" defer></script>
+   <!--JS-->
+   <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js'
+    import { getDatabase, ref, set, get, remove } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js'
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyA7JAmM79fXeWLVxFQZRB25Rvxs7H_Gw0w",
+      authDomain: "movie-watchlist-18757.firebaseapp.com",
+      projectId: "movie-watchlist-18757",
+      storageBucket: "movie-watchlist-18757.appspot.com",
+      messagingSenderId: "805387743764",
+      appId: "1:805387743764:web:1d88b6c60f2d5885742d01",
+      measurementId: "G-6975S4HSXS",
+      databaseURL: "https://movie-watchlist-18757-default-rtdb.asia-southeast1.firebasedatabase.app"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    
+    window.firebase = { initializeApp, getDatabase, ref, set, get, remove, db };
+  </script>
+ 
+  <script src="watchlist.js" type="module"></script>
   <!--TITLE-->
   <title>Movie Watchlist</title>
 </head>

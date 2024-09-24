@@ -1,5 +1,25 @@
 const results = document.querySelector('.results')
 const searchInput = document.querySelector('#searchInput')
+
+// Firebase is now available globally
+const { initializeApp, getDatabase, ref, set, get, remove } = window.firebase;
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA7JAmM79fXeWLVxFQZRB25Rvxs7H_Gw0w",
+  authDomain: "movie-watchlist-18757.firebaseapp.com",
+  projectId: "movie-watchlist-18757",
+  storageBucket: "movie-watchlist-18757.appspot.com",
+  messagingSenderId: "805387743764",
+  appId: "1:805387743764:web:1d88b6c60f2d5885742d01",
+  measurementId: "G-6975S4HSXS",
+  databaseURL: "https://movie-watchlist-18757-default-rtdb.asia-southeast1.firebasedatabase.app"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+// Make sure Firebase is initialized before using it
+console.log("Firebase initialized:", app);
+
 //Defining the maximum length of the description
 const MAX_LENGTH = 350;
 
@@ -57,10 +77,11 @@ function displayData(movie){
   </div>
   `
   //Adding event listener to the watchlist button
-  const buttonAddToWatchlist = movieCard.querySelector(`#buttonAddToWatchList-${movie.imdbID}`)
+  const buttonAddToWatchlist = movieCard.querySelector(`#buttonAddToWatchList-${movie.imdbID}`);
   buttonAddToWatchlist.addEventListener('click', () => {
-    addToWatchList(movie)
-  })
+    addToWatchList(movie);
+  });
+  
   results.appendChild(movieCard)
 
   //Adding event listener to the read more button
@@ -93,9 +114,18 @@ function toggleDescription(button, fullDescription){
 }
 
 //Function to add to watchlist
-function addToWatchList(movie){
-  displayWatchList(movie)
+function addToWatchList(movie) {
+  const movieRef = ref(db, 'watchlist/' + movie.imdbID);
+  set(movieRef, movie)
+    .then(() => {
+      console.log('Movie added to watchlist successfully');
+      // Optionally, you can update the UI here to indicate the movie was added
+    })
+    .catch((error) => {
+      console.error('Error adding movie to watchlist:', error);
+    });
 }
+
 
 //Adding event listener to the search form
 document.querySelector('.search-form').addEventListener('submit', function(e) {

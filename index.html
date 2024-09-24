@@ -9,9 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <!-- CSS -->
   <link rel="stylesheet" href="css/styles.css">
+  <!--Firebase-->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js'
+    import { getDatabase, ref, set, get, remove } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js'
+    
+    window.firebase = { initializeApp, getDatabase, ref, set, get, remove };
+  </script>
   <!--JS-->
-  <script src="index.js" defer></script>
-  <script src="watchlist.js" defer></script>
+  <script src="index.js" type="module"></script>
+  
   <!--TITLE-->
   <title>Movie Watchlist</title>
 </head>
