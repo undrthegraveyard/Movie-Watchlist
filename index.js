@@ -22,7 +22,7 @@ import icon3 from './assets/icons/icon-3.svg';
 
 async function fetchData(){
   const searchValue = searchInput.value;
-  const response = await fetch(`http://www.omdbapi.com/?apikey=99542785&t=${searchValue}&plot=full`)
+  const response = await fetch(`https://www.omdbapi.com/?apikey=99542785&t=${searchValue}&plot=full`)
   const data = await response.json()
   displayData(data)
 }
