@@ -584,10 +584,20 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"bB7Pu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 // Firebase is now available globally
 var _app = require("firebase/app");
 var _database = require("firebase/database");
 var _firebaseConfig = require("./firebaseConfig");
+// Import the SVG icons
+var _iconStarSvg = require("./assets/icons/Icon-star.svg");
+var _iconStarSvgDefault = parcelHelpers.interopDefault(_iconStarSvg);
+var _icon1Svg = require("./assets/icons/icon-1.svg");
+var _icon1SvgDefault = parcelHelpers.interopDefault(_icon1Svg);
+var _icon2Svg = require("./assets/icons/icon-2.svg");
+var _icon2SvgDefault = parcelHelpers.interopDefault(_icon2Svg);
+var _icon3Svg = require("./assets/icons/icon-3.svg");
+var _icon3SvgDefault = parcelHelpers.interopDefault(_icon3Svg);
 const results = document.querySelector(".results");
 const searchInput = document.querySelector("#searchInput");
 const app = (0, _app.initializeApp)((0, _firebaseConfig.firebaseConfig));
@@ -622,7 +632,7 @@ function displayData(movie) {
       <div class="movie-card__header">
         <p class="movie-card__title">${movie.Title}</p>
         <div class="movie-card__rating">
-          <img src="assets/icons/icon-star.svg" alt="movie ratings" class="movie-card__rating-icon">
+          <img src="${0, _iconStarSvgDefault.default}" alt="movie ratings" class="movie-card__rating-icon">
           <span class="movie-card__imdb-rating">${movie.imdbRating || "N/A"}</span>
         </div>
       </div>
@@ -631,7 +641,7 @@ function displayData(movie) {
           <p class="movie-card__runtime">${movie.Runtime || "N/A"}</p>
           <p class="movie-card__genre">${movie.Genre || "N/A"}</p>
           <div class="movie-card__watchlist">
-            <img src="assets/icons/icon-1.svg" alt="A button to add the movie to the watchlist" class="movie-card__watchlist-icon" id="buttonAddToWatchList-${movie.imdbID}">
+            <img src="${0, _icon1SvgDefault.default}" alt="A button to add the movie to the watchlist" class="movie-card__watchlist-icon" id="buttonAddToWatchList-${movie.imdbID}">
             <span class="buttonAddToWatchList" id="buttonAddToWatchList-${movie.imdbID}">Watchlist</span>
           </div>
         </div>
@@ -690,6 +700,53 @@ document.querySelector(".search-form").addEventListener("submit", function(e) {
     fetchData();
 });
 
-},{"firebase/app":"aM3Fo","firebase/database":"SJ4UY","./firebaseConfig":"jXx9b"}]},["km5uZ","bB7Pu"], "bB7Pu", "parcelRequirec260")
+},{"firebase/app":"aM3Fo","firebase/database":"SJ4UY","./firebaseConfig":"jXx9b","./assets/icons/Icon-star.svg":"3Z9g4","./assets/icons/icon-1.svg":"byxDM","./assets/icons/icon-2.svg":"2iNr0","./assets/icons/icon-3.svg":"iBUJJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3Z9g4":[function(require,module,exports) {
+module.exports = require("36c3940e41c7bbb").getBundleURL("UckoE") + "Icon-star.a55a32cc.svg" + "?" + Date.now();
+
+},{"36c3940e41c7bbb":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return "/";
+}
+function getBaseURL(url) {
+    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
+}
+// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error("Origin not found");
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"byxDM":[function(require,module,exports) {
+module.exports = require("30f3bd2f9524cd70").getBundleURL("UckoE") + "icon-1.9236540e.svg" + "?" + Date.now();
+
+},{"30f3bd2f9524cd70":"lgJ39"}],"2iNr0":[function(require,module,exports) {
+module.exports = require("52cd706cd6f08728").getBundleURL("UckoE") + "icon-2.13e29bdf.svg" + "?" + Date.now();
+
+},{"52cd706cd6f08728":"lgJ39"}],"iBUJJ":[function(require,module,exports) {
+module.exports = require("c697d0b9520f5a35").getBundleURL("UckoE") + "icon-3.2c95fce0.svg" + "?" + Date.now();
+
+},{"c697d0b9520f5a35":"lgJ39"}]},["km5uZ","bB7Pu"], "bB7Pu", "parcelRequirec260")
 
 //# sourceMappingURL=index.3d214d75.js.map

@@ -14,6 +14,12 @@ console.log("Firebase initialized:", app);
 //Defining the maximum length of the description
 const MAX_LENGTH = 350;
 
+// Import the SVG icons
+import iconStar from './assets/icons/Icon-star.svg';
+import icon1 from './assets/icons/icon-1.svg';
+import icon2 from './assets/icons/icon-2.svg';
+import icon3 from './assets/icons/icon-3.svg';
+
 async function fetchData(){
   const searchValue = searchInput.value;
   const response = await fetch(`http://www.omdbapi.com/?apikey=99542785&t=${searchValue}&plot=full`)
@@ -45,7 +51,7 @@ function displayData(movie){
       <div class="movie-card__header">
         <p class="movie-card__title">${movie.Title}</p>
         <div class="movie-card__rating">
-          <img src="assets/icons/icon-star.svg" alt="movie ratings" class="movie-card__rating-icon">
+          <img src="${iconStar}" alt="movie ratings" class="movie-card__rating-icon">
           <span class="movie-card__imdb-rating">${movie.imdbRating || 'N/A'}</span>
         </div>
       </div>
@@ -54,7 +60,7 @@ function displayData(movie){
           <p class="movie-card__runtime">${movie.Runtime || 'N/A'}</p>
           <p class="movie-card__genre">${movie.Genre || 'N/A'}</p>
           <div class="movie-card__watchlist">
-            <img src="assets/icons/icon-1.svg" alt="A button to add the movie to the watchlist" class="movie-card__watchlist-icon" id="buttonAddToWatchList-${movie.imdbID}">
+            <img src="${icon1}" alt="A button to add the movie to the watchlist" class="movie-card__watchlist-icon" id="buttonAddToWatchList-${movie.imdbID}">
             <span class="buttonAddToWatchList" id="buttonAddToWatchList-${movie.imdbID}">Watchlist</span>
           </div>
         </div>

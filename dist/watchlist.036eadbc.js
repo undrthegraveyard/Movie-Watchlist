@@ -584,33 +584,21 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"lTuUt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _app = require("firebase/app");
 var _database = require("firebase/database");
 var _firebaseConfig = require("./firebaseConfig");
+// Import the SVG icons
+var _iconStarSvg = require("./assets/icons/Icon-star.svg");
+var _iconStarSvgDefault = parcelHelpers.interopDefault(_iconStarSvg);
+var _icon2Svg = require("./assets/icons/icon-2.svg");
+var _icon2SvgDefault = parcelHelpers.interopDefault(_icon2Svg);
 const app = (0, _app.initializeApp)((0, _firebaseConfig.firebaseConfig));
 const db = (0, _database.getDatabase)(app);
-// Defining the maximum length of the description
+// Make sure Firebase is initialized before using it
+console.log("Firebase initialized:", app);
+//Defining the maximum length of the description
 const MAX_LENGTH = 350;
-// Function to display the watchlist
-function displayWatchList(movie) {
-    const movieRef = (0, _database.ref)(db, "watchlist/" + movie.imdbID);
-    (0, _database.set)(movieRef, movie);
-}
-// Function to remove the movie from the watchlist
-function removeFromWatchlist(movie) {
-    const movieRef = (0, _database.ref)(db, "watchlist/" + movie.imdbID);
-    (0, _database.remove)(movieRef).then(()=>{
-        console.log("Movie successfully removed from watchlist");
-    }).catch((error)=>{
-        console.error("Error removing movie from watchlist:", error);
-    });
-}
-// Function to truncate the description
-function truncateDescription(description, maxLength) {
-    if (description.length <= maxLength) return description;
-    return description.substring(0, maxLength) + "...";
-}
-// Wait for the DOM to be fully loaded before interacting with elements
 document.addEventListener("DOMContentLoaded", ()=>{
     const clearWatchlistButton = document.getElementById("clear-watchlist");
     const watchlistContainer = document.querySelector(".watchlist");
@@ -622,7 +610,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     });
     // Function to display the watchlist in the DOM
     function loadWatchlist() {
-        const watchlistContainer = document.querySelector(".watchlist");
         if (!watchlistContainer) {
             console.error("Watchlist container not found");
             return;
@@ -646,7 +633,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
               <div class="movie-card__header">
                 <p class="movie-card__title">${movie.Title}</p>
                 <div class="movie-card__rating">
-                  <img src="assets/icons/icon-star.svg" alt="movie ratings" class="movie-card__rating-icon">
+                  <img src="${0, _iconStarSvgDefault.default}" alt="movie ratings" class="movie-card__rating-icon">
                   <span class="movie-card__imdb-rating">${movie.imdbRating || "N/A"}</span>
                 </div>
               </div>
@@ -655,7 +642,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                   <p class="movie-card__runtime">${movie.Runtime || "N/A"}</p>
                   <p class="movie-card__genre">${movie.Genre || "N/A"}</p>
                   <div class="movie-card__watchlist">
-                    <img src="assets/icons/icon-2.svg" alt="A button to remove the movie from the watchlist" class="movie-card__watchlist-icon" id="buttonRemoveFromWatchList-${movie.imdbID}">
+                    <img src="${0, _icon2SvgDefault.default}" alt="A button to remove the movie from the watchlist" class="movie-card__watchlist-icon" id="buttonRemoveFromWatchList-${movie.imdbID}">
                     <span class="buttonRemoveFromWatchList" id="buttonRemoveFromWatchList-${movie.imdbID}">Remove</span>
                   </div>
                 </div>
@@ -674,6 +661,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         removeFromWatchlist(movie);
                         movieCard.remove();
                     });
+                    // Adding event listener to the read more button
+                    if (showReadMore) {
+                        const readMoreButton = movieCard.querySelector(".movie-card__read-more");
+                        readMoreButton.addEventListener("click", ()=>{
+                            toggleDescription(readMoreButton, movie.Plot || "N/A");
+                        });
+                    }
                     watchlistContainer.appendChild(movieCard);
                 });
             } else watchlistContainer.innerHTML = "<p>Your watchlist is empty.</p>";
@@ -684,7 +678,73 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
     loadWatchlist();
 });
+// Function to truncate the description to the maximum length
+function truncateDescription(description, maxLength) {
+    if (description.length >= maxLength) return description.substring(0, maxLength) + "...";
+    return description;
+}
+//Function to toggle the read more button
+function toggleDescription(button, fullDescription) {
+    const descriptionElement = button.closest(".movie-card__description").querySelector(".movie-card__description-text");
+    if (button.textContent === "Read More") {
+        descriptionElement.textContent = fullDescription;
+        button.textContent = "Show Less";
+    } else {
+        descriptionElement.textContent = truncateDescription(fullDescription, MAX_LENGTH);
+        button.textContent = "Read More";
+    }
+}
+//Function to remove from watchlist
+function removeFromWatchlist(movie) {
+    const movieRef = (0, _database.ref)(db, "watchlist/" + movie.imdbID);
+    (0, _database.remove)(movieRef).then(()=>{
+        console.log("Movie successfully removed from watchlist");
+    }).catch((error)=>{
+        console.error("Error removing movie from watchlist:", error);
+    });
+}
 
-},{"firebase/app":"aM3Fo","firebase/database":"SJ4UY","./firebaseConfig":"jXx9b"}]},["9gSPV","lTuUt"], "lTuUt", "parcelRequirec260")
+},{"firebase/app":"aM3Fo","firebase/database":"SJ4UY","./firebaseConfig":"jXx9b","./assets/icons/Icon-star.svg":"crAkR","./assets/icons/icon-2.svg":"hn4GX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"crAkR":[function(require,module,exports) {
+module.exports = require("15f6a9a09649aef4").getBundleURL("dCIrw") + "Icon-star.a55a32cc.svg" + "?" + Date.now();
+
+},{"15f6a9a09649aef4":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return "/";
+}
+function getBaseURL(url) {
+    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
+}
+// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error("Origin not found");
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"hn4GX":[function(require,module,exports) {
+module.exports = require("66da86c908c8097").getBundleURL("dCIrw") + "icon-2.13e29bdf.svg" + "?" + Date.now();
+
+},{"66da86c908c8097":"lgJ39"}]},["9gSPV","lTuUt"], "lTuUt", "parcelRequirec260")
 
 //# sourceMappingURL=watchlist.036eadbc.js.map

@@ -1,38 +1,19 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set, get, remove } from 'firebase/database';
+import { getDatabase, ref, get, remove } from 'firebase/database';
 import { firebaseConfig } from './firebaseConfig';
+
+// Import the SVG icons
+import iconStar from './assets/icons/Icon-star.svg';
+import icon2 from './assets/icons/icon-2.svg';
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+// Make sure Firebase is initialized before using it
+console.log("Firebase initialized:", app);
 
-// Defining the maximum length of the description
+//Defining the maximum length of the description
 const MAX_LENGTH = 350;
 
-// Function to display the watchlist
-function displayWatchList(movie) {
-  const movieRef = ref(db, 'watchlist/' + movie.imdbID);
-  set(movieRef, movie);
-}
-
-// Function to remove the movie from the watchlist
-function removeFromWatchlist(movie) {
-  const movieRef = ref(db, 'watchlist/' + movie.imdbID);
-  remove(movieRef)
-    .then(() => {
-      console.log('Movie successfully removed from watchlist');
-    })
-    .catch((error) => {
-      console.error('Error removing movie from watchlist:', error);
-    });
-}
-
-// Function to truncate the description
-function truncateDescription(description, maxLength) {
-  if (description.length <= maxLength) return description;
-  return description.substring(0, maxLength) + "...";
-}
-
-// Wait for the DOM to be fully loaded before interacting with elements
 document.addEventListener('DOMContentLoaded', () => {
   const clearWatchlistButton = document.getElementById('clear-watchlist');
   const watchlistContainer = document.querySelector('.watchlist');
@@ -48,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Function to display the watchlist in the DOM
   function loadWatchlist() {
-    const watchlistContainer = document.querySelector('.watchlist');
     if (!watchlistContainer) {
       console.error('Watchlist container not found');
       return;
@@ -77,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="movie-card__header">
                 <p class="movie-card__title">${movie.Title}</p>
                 <div class="movie-card__rating">
-                  <img src="assets/icons/icon-star.svg" alt="movie ratings" class="movie-card__rating-icon">
+                  <img src="${iconStar}" alt="movie ratings" class="movie-card__rating-icon">
                   <span class="movie-card__imdb-rating">${movie.imdbRating || 'N/A'}</span>
                 </div>
               </div>
@@ -86,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <p class="movie-card__runtime">${movie.Runtime || 'N/A'}</p>
                   <p class="movie-card__genre">${movie.Genre || 'N/A'}</p>
                   <div class="movie-card__watchlist">
-                    <img src="assets/icons/icon-2.svg" alt="A button to remove the movie from the watchlist" class="movie-card__watchlist-icon" id="buttonRemoveFromWatchList-${movie.imdbID}">
+                    <img src="${icon2}" alt="A button to remove the movie from the watchlist" class="movie-card__watchlist-icon" id="buttonRemoveFromWatchList-${movie.imdbID}">
                     <span class="buttonRemoveFromWatchList" id="buttonRemoveFromWatchList-${movie.imdbID}">Remove</span>
                   </div>
                 </div>
@@ -107,6 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
             movieCard.remove(); 
           });
 
+          // Adding event listener to the read more button
+          if(showReadMore){
+            const readMoreButton = movieCard.querySelector('.movie-card__read-more');
+            readMoreButton.addEventListener('click', () => {
+              toggleDescription(readMoreButton, movie.Plot || 'N/A')
+            });
+          }
+
           watchlistContainer.appendChild(movieCard);
         });
 
@@ -122,3 +110,35 @@ document.addEventListener('DOMContentLoaded', () => {
   
   loadWatchlist();
 });
+
+// Function to truncate the description to the maximum length
+function truncateDescription(description, maxLength){
+  if(description.length >= maxLength){
+    return description.substring(0, maxLength) + "..."
+  }
+  return description
+}
+
+//Function to toggle the read more button
+function toggleDescription(button, fullDescription){
+  const descriptionElement = button.closest('.movie-card__description').querySelector('.movie-card__description-text');
+  if (button.textContent === 'Read More') {
+    descriptionElement.textContent = fullDescription;
+    button.textContent = 'Show Less';
+  } else {
+    descriptionElement.textContent = truncateDescription(fullDescription, MAX_LENGTH);
+    button.textContent = 'Read More';
+  }
+}
+
+//Function to remove from watchlist
+function removeFromWatchlist(movie) {
+  const movieRef = ref(db, 'watchlist/' + movie.imdbID);
+  remove(movieRef)
+    .then(() => {
+      console.log('Movie successfully removed from watchlist');
+    })
+    .catch((error) => {
+      console.error('Error removing movie from watchlist:', error);
+    });
+}
