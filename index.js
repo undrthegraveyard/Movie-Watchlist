@@ -5,7 +5,7 @@ const searchInput = document.querySelector('#searchInput')
 const { initializeApp, getDatabase, ref, set, get, remove } = window.firebase;
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA7JAmM79fXeWLVxFQZRB25Rvxs7H_Gw0w",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "movie-watchlist-18757.firebaseapp.com",
   projectId: "movie-watchlist-18757",
   storageBucket: "movie-watchlist-18757.appspot.com",
